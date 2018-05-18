@@ -49,6 +49,28 @@ PHP_INI_END()
    purposes. */
 
 /* Every user-visible function in PHP should document itself in the source */
+
+/* {{{ proto string ybin(void) 
+	   Testing struct zend_string */ 
+PHP_FUNCTION(ybin)
+{
+	zend_string *str;
+	str = zend_string_init("foo", strlen("foo"), 0);
+
+	php_printf("This is my string: %s\n", ZSTR_VAL(str));
+	php_printf("It is %zd char long\n", ZSTR_LEN(str));
+
+	zend_string_hash_val(str);
+	php_printf("The string hash is %lu\n", ZSTR_H(str));
+
+	zend_string_forget_hash_val(str);
+	php_printf("The string hash is now cleared back to 0!\n");
+
+	zend_string_release(str);
+
+	RETURN_STR(str);
+}/* }}} */
+
 /* {{{ proto string confirm_ybin_compiled(string arg)
    Return a string to confirm that the module is compiled in */
 PHP_FUNCTION(confirm_ybin_compiled)
@@ -146,6 +168,7 @@ PHP_MINFO_FUNCTION(ybin)
  * Every user visible function must have an entry in ybin_functions[].
  */
 const zend_function_entry ybin_functions[] = {
+	PHP_FE(ybin, NULL)
 	PHP_FE(confirm_ybin_compiled,	NULL)		/* For testing, remove later. */
 	PHP_FE_END	/* Must be the last line in ybin_functions[] */
 };

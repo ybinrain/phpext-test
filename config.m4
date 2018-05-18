@@ -13,9 +13,8 @@ dnl [  --with-ybin             Include ybin support])
 
 dnl Otherwise use enable:
 
-dnl PHP_ARG_ENABLE(ybin, whether to enable ybin support,
-dnl Make sure that the comment is aligned:
-dnl [  --enable-ybin           Enable ybin support])
+PHP_ARG_ENABLE(ybin, whether to enable ybin support,
+[  --enable-ybin           Enable ybin support])
 
 if test "$PHP_YBIN" != "no"; then
   dnl Write more examples of tests here...
